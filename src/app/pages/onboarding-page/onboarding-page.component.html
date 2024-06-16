@@ -1,0 +1,92 @@
+<mat-stepper [disableRipple]="true" [linear]="true">
+  <mat-step
+    [stepControl]="personalInformation"
+    [label]="'Personal Information'"
+  >
+    <form [formGroup]="personalInformation">
+      <mat-form-field>
+        <mat-label>First Name</mat-label>
+        <input matInput formControlName="firstName" required />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Middle Name</mat-label>
+        <input matInput formControlName="middleName" required />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Last Name</mat-label>
+        <input matInput formControlName="lastName" required />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Date of Birth</mat-label>
+        <input
+          matInput
+          formControlName="dateOfBirth"
+          [matDatepicker]="picker"
+          required
+        />
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Gender</mat-label>
+        <mat-select formControlName="gender" required>
+          <mat-option value="male">Male</mat-option>
+          <mat-option value="female">Female</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Nationality</mat-label>
+        <input matInput formControlName="nationality" required />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Marital Status</mat-label>
+        <mat-select formControlName="maritalStatus" required>
+          <mat-option value="single">Single</mat-option>
+          <mat-option value="married">Married</mat-option>
+          <mat-option value="divorced">Divorced</mat-option>
+          <mat-option value="widowed">Widowed</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <p>
+        <mat-slide-toggle
+          [checked]="contactInformationStatus"
+          (change)="onContactInformationStatusChange()"
+          labelPosition="before"
+          >Contact Information</mat-slide-toggle
+        >
+      </p>
+      <div *ngIf="contactInformationStatus">
+        <mat-form-field>
+          <mat-label>Residential Address</mat-label>
+          <input matInput formControlName="residentialAddress" />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Mailing Address</mat-label>
+          <input matInput formControlName="mailingAddress" />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Phone Number</mat-label>
+          <input matInput formControlName="phoneNumber" />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Email Address</mat-label>
+          <input matInput formControlName="emailAddress" />
+        </mat-form-field>
+      </div>
+      <button
+        mat-raised-button
+        color="primary"
+        matStepperNext
+        type="submit"
+        (click)="onSubmit()"
+      >
+        Next
+      </button>
+    </form>
+  </mat-step>
+  <mat-step label="Employment and Income"></mat-step>
+  <mat-step label="Compliance and Risk Assessment"></mat-step>
+</mat-stepper>
