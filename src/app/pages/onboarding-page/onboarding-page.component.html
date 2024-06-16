@@ -87,6 +87,50 @@
       </button>
     </form>
   </mat-step>
-  <mat-step label="Employment and Income"></mat-step>
+  <mat-step [stepControl]="employmentAndIncome" label="Employment and Income">
+    <form [formGroup]="employmentAndIncome">
+      <mat-form-field>
+        <mat-label>Occupation</mat-label>
+        <input matInput formControlName="occupation" required />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Employer Name</mat-label>
+        <input matInput formControlName="employerName" required />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Employer Address</mat-label>
+        <input matInput formControlName="employerAddress" required />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Employment Status</mat-label>
+        <input matInput formControlName="employmentStatus" required />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Job Title</mat-label>
+        <input matInput formControlName="jobTitle" required />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Years at current employer</mat-label>
+        <input
+          matInput
+          type="number"
+          formControlName="yearOfCurrentEmployer"
+          required
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Annual Income</mat-label>
+        <input matInput type="number" formControlName="annualIncome" required />
+      </mat-form-field>
+      <div formArrayName="sourcesOfIncome">
+        <div *ngFor="let income of sourcesOfIncome.controls; let i = index">
+          <mat-form-field formGroupName="i">
+            <mat-label>Type</mat-label>
+            <input matInput formControlName="type" />
+          </mat-form-field>
+        </div>
+      </div>
+    </form>
+  </mat-step>
   <mat-step label="Compliance and Risk Assessment"></mat-step>
 </mat-stepper>

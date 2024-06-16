@@ -4,7 +4,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormArray,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { FormBuilder } from '@angular/forms';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -55,7 +60,24 @@ export class OnboardingPageComponent {
     emailAddress: [''],
   });
 
+  // TODO: add sourceOfIncome, can be multiple
+  // each source has type(salary, freelance), source(investment), amount
+  employmentAndIncome: FormGroup = this._formBuilder.group({
+    occupation: ['', Validators.required],
+    employerName: ['', Validators.required],
+    employerAddress: ['', Validators.required],
+    employmentStatus: ['', Validators.required],
+    jobTitle: ['', Validators.required],
+    yearOfCurrentEmployer: ['', Validators.required],
+    annualIncome: ['', Validators.required],
+    sourcesOfIncome: this._formBuilder.array([]),
+  });
+
   constructor(private _formBuilder: FormBuilder) {}
+
+  get sourcesOfIncome(): FormArray {
+    return this.employmentAndIncome.get('sourcesOfIncome') as FormArray;
+  }
 
   onContactInformationStatusChange() {
     this.contactInformationStatus = !this.contactInformationStatus;
